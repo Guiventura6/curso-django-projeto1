@@ -1,0 +1,68 @@
+<!DOCTYPE html>\n<html lang="pt-br">\n\n
+
+<head>\n \n\n
+    <meta charset="UTF-8">\n
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n\n
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" \n
+        integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA==" \n
+        crossorigin="anonymous" referrerpolicy="no-referrer" />\n
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/brands.min.css" \n
+        integrity="sha512-OivR4OdSsE1onDm/i3J3Hpsm5GmOVvr9r49K3jJ0dnsxVzZgaOJ5MfxEAxCyGrzWozL9uJGKz6un3A7L+redIQ==" \n
+        crossorigin="anonymous" referrerpolicy="no-referrer" />\n
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" \n
+        integrity="sha512-qzgHTQ60z8RJitD5a28/c47in6WlHGuyRvMusdnuWWBB6fZ0DWG/KyfchGSBlLVeqAz+1LzNq+gGZkCSHnSd3g==" \n
+        crossorigin="anonymous" referrerpolicy="no-referrer" />\n\n
+    <!--Fonte google roboto slab-->\n
+    <link rel="preconnect" href="https://fonts.googleapis.com">\n
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">\n\n
+    <link rel="stylesheet" href="/static/recipes/css/style.css">\n
+    <link rel="stylesheet" href="/static/global/global-style.css">\n \n\n <title>Register | Recipes</title>\n
+</head>\n\n
+
+<body>\n <header class="main-header-container">\n <div class="main-header container">\n <h1>\n <a class="main-logo"
+                    href="/">\n <i class="fa-solid fa-utensils main-logo-icon"></i>\n <span
+                        class="main-logo-text">Recipes</span>\n </a>\n </h1>\n </div>\n</header>\n <div
+        class="search-container"></div>\n<div class="container">\n <form action="/recipes/search/" method="GET"
+            class="search-form">\n <input type="search" class="search-input" name="q" value="" required>\n <button
+                type="submit" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>\n </form>\n
+    </div>\n\n <main class="main-content-container">\n \n <div class="main-content center container">\n <h2>Register
+            </h2>\n </div>\n \n \n\n\n <div class="main-content container">\n <form action="/authors/register/create/"
+                method="POST">\n\n <input type="hidden" name="csrfmiddlewaretoken"
+                    value="xbbGrkgcIrrJyF8MAK7pty8Zj9hwp3WSOvvj6VMqFitsQlIrKmQeSdZcjXYJxhWU">\n\n\n <div
+                    class="form-content form-content-grid">\n \n <div class="form-group">\n <label
+                            for="id_first_name">First name</label>\n <input type="text" name="first_name" value="first"
+                            placeholder="Ex.: John" required id="id_first_name"> \n\n \n \n </div>\n \n <div
+                        class="form-group">\n <label for="id_last_name">Last name</label>\n <input type="text"
+                            name="last_name" value="last" placeholder="Ex.: Doe" required id="id_last_name"> \n\n \n \n
+                    </div>\n \n <div class="form-group">\n <label for="id_username">Username</label>\n <input
+                            type="text" name="username" value="user" maxlength="150" minlength="4"
+                            placeholder="Your username" required id="id_username"> \n\n \n <p class="help-text">Username
+                            must have letters, numbers or one of those @.+-_. The length should be between 4 and 150
+                            characters.</p>\n \n \n </div>\n \n <div class="form-group">\n <label
+                            for="id_email">E-mail</label>\n <input type="email" name="email" value="email@anyemail.com"
+                            placeholder="Your e-mail" required id="id_email"> \n\n \n <p class="help-text">The e-mail
+                            must be valid</p>\n \n \n </div>\n \n <div class="form-group">\n <label
+                            for="id_password">Password</label>\n <input type="password" name="password"
+                            placeholder="Type your password" required id="id_password"> \n\n \n <p class="help-text">
+                            Password must have at least one uppercase letter, one lowercase letter and one number. The
+                            length should be at least 8 characters.</p>\n \n <ul class="errorlist">
+                            <li>Password must have at least one uppercase letter, one lowercase letter and one number.
+                                The length should be at least 8 characters.</li>
+                            <li>Password and Password2 must be equal</li>
+                        </ul>\n </div>\n \n <div class="form-group">\n <label for="id_password2">Password2</label>\n
+                        <input type="password" name="password2" placeholder="Repeat your password" required
+                            id="id_password2"> \n\n \n <ul class="errorlist">
+                            <li>Password and Password2 must be equal</li>
+                        </ul>\n </div>\n \n </div>\n\n \n <div class="form-content form-content-grid">\n <div
+                        class="form-group">\n <div class="message message-error">\n There are errors in the form, please
+                            fix them and send again.\n </div>\n </div>\n </div>\n \n\n <div
+                    class="form-content form-content-grid">\n <div class="form-group">\n <button
+                            type="submit">Send</button>\n </div>\n </div>\n </form>\n </div>\n\n\n \n </main>\n\n
+    <footer class="main-footer">\n <div class="developer">\n <a href="https://www.otaviomiranda.com.br/" target="_blank"
+                rel="noreferrer noopener">By Guilherme Ventura</a>\n </div>\n\n <div class="powered">\n <a
+                href="https://www.djangoproject.com/" target="_blank" rel="noreferrer noopener">Powered by Django</a>\n
+        </div>\n</footer>\n</body>\n\n
+
+</html>

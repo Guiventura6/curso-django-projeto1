@@ -23,7 +23,7 @@ def strong_password(password):
             'one lowercase letter and one number. The length should be '
             'at least 8 characters.'
         ),
-            code='Invalid'
+            code='invalid'
         )
 
 
@@ -49,25 +49,20 @@ class RegisterForm(forms.ModelForm):
             'max_length': 'Username must have less than 150 characters',
         },
         min_length=4, max_length=150,
-
     )
-
     first_name = forms.CharField(
         error_messages={'required': 'Write your first name'},
         label='First name'
     )
-
     last_name = forms.CharField(
         error_messages={'required': 'Write your last name'},
         label='Last name'
     )
-
     email = forms.EmailField(
         error_messages={'required': 'E-mail is required'},
         label='E-mail',
-        help_text='The e-mail must be valid',
+        help_text='The e-mail must be valid.',
     )
-
     password = forms.CharField(
         widget=forms.PasswordInput(),
         error_messages={
@@ -79,7 +74,7 @@ class RegisterForm(forms.ModelForm):
             'at least 8 characters.'
         ),
         validators=[strong_password],
-        label='Password',
+        label='Password'
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(),
@@ -99,6 +94,17 @@ class RegisterForm(forms.ModelForm):
             'password',
         ]
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '')
+        exists = User.objects.filter(email=email).exists()
+
+        if exists:
+            raise ValidationError(
+                'User e-mail is already in use', code='invalid',
+            )
+
+        return email
+
     def clean(self):
         cleaned_data = super().clean()
 
@@ -107,8 +113,8 @@ class RegisterForm(forms.ModelForm):
 
         if password != password2:
             password_confirmation_error = ValidationError(
-                'Password and Password2 must be equal',
-                code='invalid',
+                'Password and password2 must be equal',
+                code='invalid'
             )
             raise ValidationError({
                 'password': password_confirmation_error,
