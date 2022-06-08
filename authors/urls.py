@@ -1,5 +1,7 @@
 from django.urls import path
 
+from authors.views.dashboard_recipe import DashboardRecipeDelete
+
 from . import views
 
 app_name = 'authors'
@@ -18,7 +20,7 @@ urlpatterns = [
     ),
     path(
         'dashboard/recipe/delete/',
-        views.dashboard_recipe_delete,
+        DashboardRecipeDelete.as_view(),
         name='dashboard_recipe_delete',
     ),
 
