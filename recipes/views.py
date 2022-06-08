@@ -41,6 +41,21 @@ class RecipeListViewHome(RecipeListViewBase):
     template_name = 'recipes/pages/home.html'
 
 
+class RecipeListViewCategory(RecipeListViewBase):
+    template_name = 'recipes/pages/category.html'
+
+    def get_queryset(self, *args, **kwargs):
+        query_set = super().get_queryset(*args, **kwargs)
+        query_set = query_set.filter(
+            category__id=self.kwargs.get('category_id')
+        )
+        return query_set
+
+
+class RecipeListViewSearch(RecipeListViewBase):
+    template_name = 'recipes/pages/search.html'
+
+
 def home(request):
     recipes = Recipe.objects.filter(
         is_published=True,
