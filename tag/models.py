@@ -11,12 +11,12 @@ class Tag(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
 
-    # Aqui começam os campos para a relação genérica
+    # Aqui começam os campo para a relação genérica
 
     # Representa o model que queremos encaixar aqui
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     # Representa o id da linha do model descrito acima
-    object_id = models.CharField()
+    object_id = models.CharField(max_length=255)
     # Um campo que representa a relação genérica que conhece os
     # campos acima (content_type e object_id)
     content_object = GenericForeignKey('content_type', 'object_id')
@@ -24,7 +24,7 @@ class Tag(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             rand_letters = ''.join(
-                SystemRandom().choice(
+                SystemRandom().choices(
                     string.ascii_letters + string.digits,
                     k=5,
                 )
