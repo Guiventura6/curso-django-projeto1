@@ -86,17 +86,21 @@ class Recipe(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        # pre-save
         if not self.slug:
             slug = f'{slugify(self.title)}'
             self.slug = slug
 
+        saved = super().save(*args, **kwargs)
+
         if self.cover:
             try:
-                self.resize_image(self.cover, 800)
+                self.resize_image(self.cover, 840)
             except FileNotFoundError:
                 ...
 
-        return super().save(*args, **kwargs)
+        return saved
+        # post_save
 
     def clean(self, *args, **kwargs):
         error_messages = defaultdict(list)
