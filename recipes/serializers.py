@@ -11,13 +11,12 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Recipe
         fields = [
             'id', 'title', 'description', 'author',
             'category', 'tags', 'public', 'preparation',
-            'tag_objects', 'tag_links'
+            'tag_objects', 'tag_links',
         ]
 
     public = serializers.BooleanField(
@@ -32,7 +31,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         read_only=True,
     )
     tag_objects = TagSerializer(
-        many='True', source='tags',
+        many=True, source='tags',
         read_only=True,
     )
     tag_links = serializers.HyperlinkedRelatedField(
@@ -44,3 +43,27 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def any_method_name(self, recipe):
         return f'{recipe.preparation_time} {recipe.preparation_time_unit}'
+
+    def validate(self, attrs):
+        super_validate = super().validate(attrs)
+
+        title = attrs.get('title')
+        description = attrs.get('description')
+
+        if title == description:
+            raise serializers.ValidationError(
+                {
+                    "title": ["Posso", "ter", "mais de um erro"],
+                    "description": ["Posso", "ter", "mais de um erro"],
+                }
+            )
+
+        return super_validate
+
+    def validate_title(self, value):
+        title = value
+
+        if len(title) < 5:
+            raise serializers.ValidationError('Must have at least 5 chars.')
+
+        return title
